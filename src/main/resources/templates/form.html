@@ -23,7 +23,7 @@
 									
 									<div class="form-group">
 										<label for="name">名前</label>
-										<input type="text" class="form-control" th:errorclass="invalid-feedback" th:field="*{name}">
+										<input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{name}">
 										<div class="invalid-feedback" th:errors="*{name}"></div>
 									</div>
 									

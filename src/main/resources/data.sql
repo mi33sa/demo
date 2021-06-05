@@ -1,2 +1,1 @@
-INSERT INTO department(name)
-VALUES('営業'),('経理'),('開発'),('総務');
+INSERT INTO coffee(id,name) VALUES(1, 'ブレンドコーヒー'),(2, 'ジャワコーヒー');
