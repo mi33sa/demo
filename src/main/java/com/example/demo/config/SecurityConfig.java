@@ -7,12 +7,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.example.demo.util.Role;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	private final UserDetailsService userDetailService;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -21,17 +29,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**","/webjars/**");
+		web.ignoring().antMatchers("/js/**","/css/**","/img/**", "/webjars/**");
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/login").permitAll()
+			.antMatchers("/login","/register").permitAll()
+			.antMatchers("/admin/**").hasRole(Role.ADMIN.name())
 			.anyRequest().authenticated()
 			.and()
 			//ログインの設定
-			.formLogin().loginPage("/login").defaultSuccessUrl("/")
+			.formLogin().loginPage("/login").defaultSuccessUrl("/",true)
 			.and()
 			//ログアウトの設定
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -42,9 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.inMemoryAuthentication()
-		.withUser("admin").password(passwordEncoder().encode("password")).authorities("ROLE_ADMIN")
-		.and()
-		.withUser("user").password(passwordEncoder().encode("password")).authorities("ROLE_USER");
+		auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
 	}
 }
