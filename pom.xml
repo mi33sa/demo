@@ -79,12 +79,12 @@
 			<artifactId>webjars-locator</artifactId>
 			<version>0.40</version>
 		</dependency>
-		<dependency>
+ 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>4.5.3</version>
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>startbootstrap-sb-admin-2</artifactId>
 			<version>4.0.6</version>
@@ -108,7 +108,7 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jszip</artifactId>
 			<version>3.1.0</version>
-		</dependency>
+		</dependency> -->
 		
 	</dependencies>
 

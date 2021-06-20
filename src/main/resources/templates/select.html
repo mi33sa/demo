@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th =" http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<th:block th:insert="fragments/base :: header"></th:block>
+</head>
+<body>
+	<th:block th:insert ="fragments/sidebar :: sidebar"></th:block>
+	<div class="container">
+ 		<div class="row">
+ 			<div class="col-12 col-lg-6  align-self-center ml-4">
+				<h4 class="mt-4 mb-3">会員情報修正</h4>
+
+				<form id="user-form" th:object ="${user}" method="post" th:action="@{select}">
+
+<!-- 					<div class="form-group">
+						<label for="name">
+							<span class="badge badge-danger">必須</span>ユーザ名
+						</label>
+						<input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{username}" disabled>
+						<div class="invalid-feedback" th:errors="*{username}"></div>
+					</div> -->
+
+<!-- 					<div class="form-group">
+						<label for="password">
+							<span class="badge badge-danger">必須</span>パスワード
+						</label>
+						<input type="password" class="form-control" th:errorclass="is-invalid" th:field="*{password}" disabled>
+						<div class="invalid-feedback" th:errors="*{password}"></div>
+					</div> -->
+
+					<div class="form-group">
+				    	<label for="email" class="form-label"><span class="badge badge-danger">必須</span>メールアドレス</label>
+				    	<input type="email" class="form-control" th:field="*{email}"  th:errorclass="is-invalid" >
+				    	<div class="invalid-feedback" th:errors="*{email}"></div>
+					</div>
+
+					<div class="form-group">
+						<label for="name">性別</label>
+						<div th:each="gender :${T(com.example.demo.util.Type).GENDERS}">
+							<th:block th:if="${user.gender == gender.key}">
+								<input type="radio" class="m-2" th:field="*{gender}" th:value="${gender.key}" checked>
+							</th:block>
+							<th:block th:unless="${user.gender == gender.key}">
+								<input type="radio" class="m-2" th:field="*{gender}" th:value="${gender.key}">
+							</th:block>
+
+							<label th:for="${#ids.prev('gender')}" th:text="${gender.value}"></label>
+						</div>
+					</div>
+
+					<input type="hidden" th:field="*{id}">
+					<input type="hidden" th:field="*{username}">
+					<input type="hidden" th:field="*{password}">
+					<input type="hidden" th:field="*{admin}">
+					<input type="hidden" th:field="*{role}">
+					<input type="hidden" th:field="*{active}">
+
+					<button type="submit" class="btn btn-primary">更新</button>
+					<button type="button" id="btn-update" class="btn btn-primary">更新(REST)</button>
+					<a th:href="@{/}"><button type="button" class="btn btn-secondary">戻る</button></a>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<th:block th:insert="fragments/base :: scripts"></th:block>
+	<script th:src="@{/js/rest.js}"></script>
+</body>
+</html>

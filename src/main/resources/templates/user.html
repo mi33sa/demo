@@ -4,45 +4,35 @@
 <meta charset="UTF-8">
 <th:block th:insert="fragments/base :: header"></th:block>
 </head>
-<body id="page-top">
-	<div id="wrapper">
-		<th:block th:insert ="fragments/sidebar :: sidebar"></th:block>
-		
-		<div id="contents-wrapper" class="d-flex flex-column">
-			<div id="content">
-				<div class="container-fluid">
-				
-					<div class="card shadow my-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">ログイン情報</h6>
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-							
-								<table id="user-table" class="table table-borderd">
-									<thead>
-										<tr>
-											<th>ログインユーザ名</th>
-											<th>ユーザ情報</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th th:text="${username}"></th>
-											<th th:text="${role}"></th>
-										</tr>
-									</tbody>
-								</table>
+<body>
+	<th:block th:insert ="fragments/sidebar :: sidebar"></th:block>
+	<div class="container">
+ 		<div class="row">
+ 			<div class="col-12 col-lg-6  align-self-center ml-4">
+				<h4 class="mt-4 mb-3">ログイン情報</h4>
 
-								
-							</div>
-						</div>
-					</div>
+
+				<table class="table table-bordered">
+					<thead class="thead-light">
+						<tr>
+							<th>ログインユーザ名</th>
+							<th>ユーザ情報</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th th:text="${username}"></th>
+							<th th:text="${role}"></th>
+						</tr>
+					</tbody>
+				</table>
+				<div class="text-center">
+					<a th:href="@{/rest/select}"><button class="btn btn-primary">編集</button></a>
 				</div>
-				
-			</div>	
+			</div>
 		</div>
 	</div>
+	
 	<th:block th:insert="fragments/base :: scripts"></th:block>
 </body>
 </html>
