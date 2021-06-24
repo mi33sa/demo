@@ -35,7 +35,7 @@ public class SecurityController {
 		return "user";
 	}
 
-	@GetMapping("/admin/list")
+	@GetMapping("/list")
 	public String showAdminList(Model model) {
 		model.addAttribute("users",SiteUserRepository.findAll());
 		return "list";
